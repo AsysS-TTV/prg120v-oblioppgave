@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Registrer klasse</h1>
-    <form action="registrerklasse.php" method="post" id="registrerklasseform">
+    <form action="" method="post" id="registrerklasseSkjema" name="registrerklasseSkjema">
     Klassekode: <input type="text" id="klassekode" name="klassekode"><br>
     Klassenavn: <input type="text" id="klassenavn" name="klassenavn"><br>
     Studiumkode: <input type="text" id="studiumkode" name="studiumkode"><br>
@@ -43,6 +43,5 @@ if (isset($_POST["klassekode"])) {
                 echo "Klassen er ikke registrert";
             }
         }
-        mysqli_close($db); /* lukker tilkobling til database-serveren */
     }
 ?>
