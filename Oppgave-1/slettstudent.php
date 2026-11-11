@@ -21,29 +21,20 @@
 
 <?php
     if (isset($_POST["Slettstudentknapp"])) {
-        if (isset($_POST["brukernavn"])) {
-            $brukernavn = $_POST["brukernavn"];
-            include 'db-kobling.php';
-            $sqlsetning = "SELECT * FROM student WHERE brukernavn = '$brukernavn'";
-            $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente student");
-            $rad = mysqli_fetch_array($resultat);
-            $fornavn = $rad["fornavn"];
-            $etternavn = $rad["etternavn"];
-            $klassekode = $rad["klassekode"];
+        $brukernavn = $_POST["brukernavn"];
 
     include 'db-kobling.php';
-        $sqlsetning = "SELECT * FROM student WHERE brukernavn = '$brukernavn' AND fornavn = '$fornavn' AND etternavn = '$etternavn' AND klassekode = '$klassekode'";
+        $sqlsetning = "SELECT * FROM student WHERE brukernavn = '$brukernavn'";
         $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente student");
         $antallRader = mysqli_num_rows($resultat);
             if ($antallRader==0) {
                 print ("Studenten finnes ikke.");
              }
             else {
-                $sqlsetning = "DELETE FROM student WHERE brukernavn = '$brukernavn' AND fornavn = '$fornavn' AND etternavn = '$etternavn' AND klassekode = '$klassekode'";
+                $sqlsetning = "DELETE FROM student WHERE brukernavn = '$brukernavn'";
                 mysqli_query($db, $sqlsetning) or die ("ikke mulig å slette student");
-                echo "<p>Studenten $brukernavn $fornavn $etternavn $klassekode er slettet.</p>";
+                echo "<p>Studenten $brukernavn er slettet.</p>";
             }
         }
-    }
     ?> 
 
