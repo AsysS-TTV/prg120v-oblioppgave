@@ -17,30 +17,36 @@
 
 <?php /* registrerklasse.php */
 /*
-/*  Programmet registrerer klasse i database
-*/
+ *  Programmet registrerer klasse i database
+ */
+
+// Sjekker om skjemaet er sendt inn
 if (isset($_POST["klassekode"])) {
+    // Henter verdiene fra skjemaet
     $klassekode = $_POST["klassekode"];
     $klassenavn = $_POST["klassenavn"];
     $studiumkode = $_POST["studiumkode"];
 
-    include 'db-kobling.php'; /* tilkobling til database-serveren utført */
-        $sqlsetning="SELECT * FROM klasse WHERE klassekode='$klassekode'";
-        $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å hente data fra database");
-        $antall_rader=mysqli_num_rows($sqlresultat);
+    include 'db-kobling.php'; // Tilkobler til databasen
 
-        if ($antall_rader != 0) {
-            echo "Klassen eksisterer allerede";
+    // Sjekker om klassen allerede eksisterer
+    $sqlsetning="SELECT * FROM klasse WHERE klassekode='$klassekode'";
+    $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å hente data fra database");
+    $antall_rader=mysqli_num_rows($sqlresultat);
+
+    if ($antall_rader != 0) {
+        echo "Klassen eksisterer allerede";
+    }
+    else {
+        // Legger til ny klasse i databasen
+        $sqlsetning="INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode')";
+        $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å registrere data i database");
+        if ($sqlresultat) {
+            echo "Klassen $klassekode, $klassenavn, $studiumkode er nå registrert";
         }
         else {
-            $sqlsetning="INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode')";
-            $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å registrere data i database");
-            if ($sqlresultat) {
-                echo "Klassen $klassekode, $klassenavn, $studiumkode er nå registrert";
-            }
-            else {
-                echo "Klassen er ikke registrert";
-            }
+            echo "Klassen er ikke registrert";
         }
     }
+}
 ?>

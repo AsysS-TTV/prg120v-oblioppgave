@@ -20,14 +20,23 @@
 </html>
 
 <?php
+    // Sjekker om knappen "Slett student" ble klikket
     if (isset($_POST["Slettstudentknapp"])) {
         $brukernavn = $_POST["brukernavn"];
+        
+        // Validerer at en student ble valgt
         if (!$brukernavn) {
             die("Vennligst velg en student.");
         }
-    include 'db-kobling.php';
-         $sqlsetning = "DELETE FROM student WHERE brukernavn = '$brukernavn'";
-             mysqli_query($db, $sqlsetning) or die ("ikke mulig å slette student");
-             echo "<p>Studenten $brukernavn er slettet.</p>";
-            }
-?> 
+
+        // Tilkobler til databasen
+        include 'db-kobling.php';
+        
+        // Sletter studenten fra databasen
+        $sqlsetning = "DELETE FROM student WHERE brukernavn = '$brukernavn'";
+        mysqli_query($db, $sqlsetning) or die ("ikke mulig å slette student");
+        
+        // Bekrefter at studenten ble slettet
+        echo "<p>Studenten $brukernavn er slettet.</p>";
+    }
+?>
