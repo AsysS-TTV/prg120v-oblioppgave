@@ -8,6 +8,13 @@
 <body>
     <h1>Slett student</h1>
     <p>Velg en student å slette:</p>
+    <form method="post" action="">
+        Student 
+        <select name="brukernavn">
+            <?php include 'dynamisk-listeboks.php'; hentStudenter(); ?>
+        </select>
+        <input type="submit" value="Slett student">
+    </form>
 </body>
 </html>
 
