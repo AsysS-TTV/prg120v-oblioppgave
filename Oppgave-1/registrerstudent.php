@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Registrer student</h1>
-    <form action="" method="post" id="registrerstudentSkjema" name="registrerstudentSkjema">
+    <form method="post" action="" id="registrerstudentSkjema" name="registrerstudentSkjema">
     Brukernavn: <input type="text" id="brukernavn" name="brukernavn"><br>
     Fornavn: <input type="text" id="fornavn" name="fornavn"><br>
     Etternavn: <input type="text" id="etternavn" name="etternavn"><br>
