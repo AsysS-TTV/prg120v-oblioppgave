@@ -1,5 +1,3 @@
-<script src="funksjoner.js"></script>
-
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -15,6 +13,7 @@
             <?php include("dynamiske-funksjoner.php"); hentStudenter(); ?>
         </select> <br/>
         <input type="submit" value="Slett student" id="Slettstudentknapp" name="Slettstudentknapp">
+        <script src="funksjoner.js"></script>
     </form>
 </body>
 </html>
