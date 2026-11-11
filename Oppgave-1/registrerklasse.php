@@ -25,22 +25,24 @@ if (isset($_POST["klassekode"])) {
     $studiumkode = $_POST["studiumkode"];
 
     include 'db-kobling.php'; /* tilkobling til database-serveren utført */
+        $sqlsetning="SELECT * FROM klasse WHERE klasse='$klassekode'";
+        $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å hente data fra database");
+        $antall_rader=mysqli_num_rows($sqlresultat);
 
-    $sqlsetning="SELECT * FROM klasse WHERE klasse='$klassekode'";
-    $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å hente data fra database");
-    if (mysqli_num_rows($sqlresultat) > 0) {
-        die("Klassen eksisterer allerede");
-    }
-    else {
-        $sqlsetning="INSERT INTO klasse (klasse, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode')";
-        $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å registrere data i database");
-        if ($sqlresultat) {
-            echo "Klassen er nå registrert";
+        if ($antall_rader != 0) {
+            echo "Klassen eksisterer allerede";
         }
-        else {
-            echo "Klassen er ikke registrert";
+        else 
+        {
+            $sqlsetning="INSERT INTO klasse (klasse, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode')";
+            $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å registrere data i database");
+            if ($sqlresultat) {
+                echo "Klassen er nå registrert";
+            }
+            else {
+                echo "Klassen er ikke registrert";
+            }
         }
+        mysqli_close($db); /* lukker tilkobling til database-serveren */
     }
-    mysqli_close($db); /* lukker tilkobling til database-serveren */
-}
 ?>
