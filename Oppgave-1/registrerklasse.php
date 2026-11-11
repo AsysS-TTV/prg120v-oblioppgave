@@ -8,9 +8,9 @@
     <form action="registrerklasse.php" method="post">
         <label for="klasse">Klasse:</label><br>
         <select id="registerklasse" name="klasse"><br>
-            <option value="1">klassekode</option>
-            <option value="2">klassenavn</option>
-            <option value="3">studiumkode</option>
+            <option value="1" text="klassekode">klassekode</option>
+            <option value="2" text="klassenavn">klassenavn</option>
+            <option value="3" text="studiumkode">studiumkode</option>
         </select><br>
         <input type="submit" value="Registrer">
     </form>
