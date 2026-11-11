@@ -23,7 +23,7 @@
 */
 include 'db-kobling.php'; /* tilkobling til database-serveren utført */
 
-$sqlsetning="INSERT INTO klasse (klasse, klassenavn, studiumkode) VALUES ('$_POST[klasse]', '$_POST[klassenavn]', '$_POST[studiumkode]')";
+$sqlsetning="INSERT INTO klassekode (klasse, klassenavn, studiumkode) VALUES ('$_POST[klasse]', '$_POST[klassenavn]', '$_POST[studiumkode]')";
 $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å registrere data i database");
 if ($sqlresultat) {
     echo "Klassen er nå registrert";
