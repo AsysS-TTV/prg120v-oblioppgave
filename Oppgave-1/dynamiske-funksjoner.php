@@ -2,7 +2,7 @@
 
 function hentKlasser() {
     include 'db-kobling.php';
-    $sqlsetning = "SELECT * FROM klasse";
+    $sqlsetning = "SELECT * FROM klasse ORDER BY klassekode";
     $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente klasser");
     while ($rad = mysqli_fetch_array($resultat)) {
         $klassekode = $rad["klassekode"];
@@ -14,7 +14,7 @@ function hentKlasser() {
 
 function hentStudenter() {
     include 'db-kobling.php';
-    $sqlsetning = "SELECT * FROM student";
+    $sqlsetning = "SELECT * FROM student ORDER BY brukernavn";
     $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente studenter");
     while ($rad = mysqli_fetch_array($resultat)) {
         $brukernavn = $rad["brukernavn"];
@@ -27,12 +27,13 @@ function hentStudenter() {
 
 function hentStudenterFraKlasse($klassekode) {
     include 'db-kobling.php';
-    $sqlsetning = "SELECT * FROM student WHERE klassekode = '$klassekode'";
+    $sqlsetning = "SELECT * FROM student WHERE klassekode = '$klassekode' ORDER BY brukernavn";
     $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente studenter");
     while ($rad = mysqli_fetch_array($resultat)) {
         $brukernavn = $rad["brukernavn"];
         $fornavn = $rad["fornavn"];
         $etternavn = $rad["etternavn"];
+        $klassekode = $rad["klassekode"];
         echo "<option value='$brukernavn'>$brukernavn $fornavn $etternavn $klassekode</option>";
     }
 }
