@@ -26,10 +26,10 @@
             die("Vennligst velg en klasse.");
         }
     include 'db-kobling.php';
-         $sqlsetning = "DELETE FROM klasse WHERE klassekode = '$klassekode'";
-         if ($klassekode < 0) {
+             if ($klassekode < 0) {
              print("Kan ikke slette klasse med studenter i den");
          }
+         $sqlsetning = "DELETE FROM klasse WHERE klassekode = '$klassekode'";
              mysqli_query($db, $sqlsetning) or die ("ikke mulig å slette klasse");
              echo "<p>Klassen $klassekode er slettet.</p>";
             }
