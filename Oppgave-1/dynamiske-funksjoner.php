@@ -32,7 +32,7 @@ function hentStudenter() {
 }
 
 // Henter alle studenter fra en spesifikk klasse og viser dem som option-elementer i en dropdown-liste
-function hentStudenterFraKlasse($klassekode) {
+/* function hentStudenterFraKlasse($klassekode) {
     include 'db-kobling.php';
     $sqlsetning = "SELECT * FROM student WHERE klassekode = '$klassekode' ORDER BY brukernavn";
     $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente studenter");
@@ -45,5 +45,5 @@ function hentStudenterFraKlasse($klassekode) {
         $klassekode = $rad["klassekode"];
         echo "<option value='$brukernavn'>$brukernavn $fornavn $etternavn $klassekode</option>";
     }
-} 
+}  */
 ?>

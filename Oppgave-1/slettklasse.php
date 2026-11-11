@@ -14,7 +14,6 @@
         </select> <br/>
         <script src="funksjoner.js"></script>
         <input type="submit" value="Slett klasse" id="Slettklasseknapp" name="Slettklasseknapp">
-
     </form>
 </body>
 </html>

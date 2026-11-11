@@ -1,3 +1,5 @@
+<script src="funksjoner.js"></script>
+
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -12,8 +14,7 @@
             <option value="">Velg student</option>
             <?php include("dynamiske-funksjoner.php"); hentStudenter(); ?>
         </select> <br/>
-        <input type="submit" value="Slett student" id="Slettstudentknapp" name="Slettstudentknapp">
-        <script src="funksjoner.js"></script>
+        <input type="submit" value="Slett student" id="Slettstudentknapp" name="Slettstudentknapp" onclick="return bekreft()">
     </form>
 </body>
 </html>
