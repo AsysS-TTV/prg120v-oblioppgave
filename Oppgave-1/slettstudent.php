@@ -24,17 +24,9 @@
         $brukernavn = $_POST["brukernavn"];
 
     include 'db-kobling.php';
-        $sqlsetning = "SELECT * FROM student WHERE brukernavn = '$brukernavn'";
-        $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente student");
-        $antallRader = mysqli_num_rows($resultat);
-            if ($antallRader==0) {
-                print ("Studenten finnes ikke.");
-             }
-            else {
-                $sqlsetning = "DELETE FROM student WHERE brukernavn = '$brukernavn'";
-                mysqli_query($db, $sqlsetning) or die ("ikke mulig å slette student");
-                echo "<p>Studenten $brukernavn er slettet.</p>";
+         $sqlsetning = "DELETE FROM student WHERE brukernavn = '$brukernavn'";
+             mysqli_query($db, $sqlsetning) or die ("ikke mulig å slette student");
+             echo "<p>Studenten $brukernavn er slettet.</p>";
             }
-        }
     ?> 
 
