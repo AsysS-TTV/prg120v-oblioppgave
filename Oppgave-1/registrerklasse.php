@@ -5,19 +5,10 @@
 </head>
 <body>
     <h1>Registrer klasse</h1>
-    <form action="registrerklasse.php" method="post">
-        <input type="hidden" name="submit" value="1">
-        <label for="klasse">Klasse:</label><br>
-        <input list="registerklasse" id="registerklasse" name="klassekode"><br>
-            <datalist id="registerklasse">
-                <option value="INF100">
-                <option value="INF200">
-                <option value="INF300">
-            </datalist><br>
-        <label for="klassenavn">Klassenavn:</label><br>
-        <input type="text" id="klassenavn" name="klassenavn"><br>
-        <label for="studiumkode">Studiumkode:</label><br>
-        <input type="text" id="studiumkode" name="studiumkode"><br>
+    <form action="registrerklasse.php" method="post" id="registrerklasseform">
+    Klassekode: <input type="text" id="klassekode" name="klassekode"><br>
+    Klassenavn: <input type="text" id="klassenavn" name="klassenavn"><br>
+    Studiumkode: <input type="text" id="studiumkode" name="studiumkode"><br>
         <input type="submit" value="Registrer">
         <input type="reset" value="Nullstill">
     </form>
@@ -31,7 +22,7 @@
 
 include 'db-kobling.php'; /* tilkobling til database-serveren utført */
 
-if (isset($_POST["submit"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $klasse = $_POST["klassekode"];
     $klassenavn = $_POST["klassenavn"];
     $studiumkode = $_POST["studiumkode"];
