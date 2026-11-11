@@ -53,6 +53,10 @@ else {
     else {
         echo "Klassen er ikke registrert";
     }}
-
+for ($r=1; $r<=mysqli_num_rows($sqlresultat); $r++) {
+    $rad=mysqli_fetch_array($sqlresultat);
+    echo "$rad[0] $rad[1] $rad[2]";
+    echo "<br>";
+}
 mysqli_close($db); /* lukker tilkobling til database-serveren */
 ?>
