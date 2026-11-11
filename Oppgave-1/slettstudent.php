@@ -12,7 +12,7 @@
         Student:
         <select name="brukernavn" id="brukernavn">
             <option value="">Velg student</option>
-            <?php include('dynamisk-listeboks.php'); hentStudenter(); ?>
+            <?php include("dynamisk-funksjoner.php"); hentStudenter(); ?>
         </select> <br/>
         <input type="submit" value="Slett student" id="Slettstudentknapp" name="Slettstudentknapp">
     </form>
