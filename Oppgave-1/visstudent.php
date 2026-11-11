@@ -28,3 +28,4 @@
         echo "<tr><td>$brukernavn</td><td>$fornavn</td><td>$etternavn</td><td>$klassekode</td></tr>";
     }
     echo "</table>";
+?>
