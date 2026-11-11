@@ -1,5 +1,6 @@
 <?php
 
+// Henter alle klasser fra databasen og viser dem som option-elementer i en dropdown-liste
 function hentKlasser() {
     include 'db-kobling.php';
     $sqlsetning = "SELECT * FROM klasse ORDER BY klassekode";
@@ -14,6 +15,7 @@ function hentKlasser() {
     }
 }
 
+// Henter alle studenter fra databasen og viser dem som option-elementer i en dropdown-liste
 function hentStudenter() {
     include 'db-kobling.php';
     $sqlsetning = "SELECT * FROM student ORDER BY brukernavn;";
@@ -29,6 +31,7 @@ function hentStudenter() {
     }
 }
 
+// Henter alle studenter fra en spesifikk klasse og viser dem som option-elementer i en dropdown-liste
 function hentStudenterFraKlasse($klassekode) {
     include 'db-kobling.php';
     $sqlsetning = "SELECT * FROM student WHERE klassekode = '$klassekode' ORDER BY brukernavn";

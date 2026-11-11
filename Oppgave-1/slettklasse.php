@@ -26,9 +26,14 @@
             die("Vennligst velg en klasse.");
         }
     include 'db-kobling.php';
-             if ($klassekode < 0) {
-             print("Kan ikke slette klasse med studenter i den");
-         }
+// Sjekk om klassen har studenter før sletting
+        $sjekkStudenter = "SELECT COUNT(*) AS antall FROM student WHERE klassekode = '$klassekode'";
+        $resultat = mysqli_query($db, $sjekkStudenter);
+        $rad = mysqli_fetch_assoc($resultat);
+        if ($rad['antall'] > 0) {
+            die("Kan ikke slette klasse med studenter i den");
+        }
+// Slett klassen hvis ingen studenter er tilknyttet den
          $sqlsetning = "DELETE FROM klasse WHERE klassekode = '$klassekode'";
              mysqli_query($db, $sqlsetning) or die ("ikke mulig å slette klasse");
              echo "<p>Klassen $klassekode er slettet.</p>";
