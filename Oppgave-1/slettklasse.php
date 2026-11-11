@@ -6,14 +6,14 @@
 <body>
     <h1>Slett klasse</h1>
     <p>Velg en klasse å slette:</p>
-    <form method="post" action="" id="Slettklasseknapp" name="Slettklasseknapp" onclick="return bekreft()"> 
+    <form method="post" action="" id="Slettklasseknapp" name="Slettklasseknapp"> 
         Klasse:
         <select name="klassekode" id="klassekode">
             <option value="">Velg klasse</option>
             <?php include("dynamiske-funksjoner.php"); hentKlasser(); ?>
         </select> <br/>
         <script src="funksjoner.js"></script>
-        <input type="submit" value="Slett klasse" id="Slettklasseknapp" name="Slettklasseknapp">
+        <input type="submit" value="Slett klasse" id="Slettklasseknapp" name="Slettklasseknapp" onclick="return bekreft()">
     </form>
 </body>
 </html>
