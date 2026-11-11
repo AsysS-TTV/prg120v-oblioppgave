@@ -3,8 +3,10 @@
 function hentKlasser() {
     include 'db-kobling.php';
     $sqlsetning = "SELECT * FROM klasse ORDER BY klassekode";
-    $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente klasser");
-    while ($rad = mysqli_fetch_array($resultat)) {
+    $sqlresultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente klasser");
+    $antallRader = mysqli_num_rows($sqlresultat);
+    for ($r=1;$r<=$antallRader;$r++) {
+        $rad = mysqli_fetch_array($sqlresultat);
         $klassekode = $rad["klassekode"];
         $klassenavn = $rad["klassenavn"];
         $studiumkode = $rad["studiumkode"];
@@ -15,8 +17,10 @@ function hentKlasser() {
 function hentStudenter() {
     include 'db-kobling.php';
     $sqlsetning = "SELECT * FROM student ORDER BY brukernavn";
-    $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente studenter");
-    while ($rad = mysqli_fetch_array($resultat)) {
+    $sqlresultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente studenter");
+    $antallRader = mysqli_num_rows($sqlresultat);
+    for ($r=1;$r<=$antallRader;$r++) {
+        $rad = mysqli_fetch_array($sqlresultat);
         $brukernavn = $rad["brukernavn"];
         $fornavn = $rad["fornavn"];
         $etternavn = $rad["etternavn"];
@@ -29,7 +33,9 @@ function hentStudenterFraKlasse($klassekode) {
     include 'db-kobling.php';
     $sqlsetning = "SELECT * FROM student WHERE klassekode = '$klassekode' ORDER BY brukernavn";
     $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente studenter");
-    while ($rad = mysqli_fetch_array($resultat)) {
+    $antallRader = mysqli_num_rows($resultat);
+    for ($r=1;$r<=$antallRader;$r++) {
+        $rad = mysqli_fetch_array($resultat);
         $brukernavn = $rad["brukernavn"];
         $fornavn = $rad["fornavn"];
         $etternavn = $rad["etternavn"];
