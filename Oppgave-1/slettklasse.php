@@ -6,7 +6,7 @@
 <body>
     <h1>Slett klasse</h1>
     <p>Velg en klasse å slette:</p>
-    <form method="post" action="" id="Slettklasseknapp" name="Slettklasseknapp"> 
+    <form method="post" action="" id="Slettklasseknapp" name="Slettklasseknapp" onclick="return bekreft()"> 
         Klasse:
         <select name="klassekode" id="klassekode">
             <option value="">Velg klasse</option>
