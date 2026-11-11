@@ -6,10 +6,12 @@
 <body>
     <h1>Registrer klasse</h1>
     <form action="registrerklasse.php" method="post">
-        <label for="klasse">Klasse:</label>
-        <input type="text" id="klassekode" name="klasse">
-        <input type="text" id="klassenavn" name="klassenavn">
-        <input type="text" id="studiumkode" name="studiumkode">
+        <label for="klasse">Klasse:</label><br>
+        <select id="registerklasse" name="klasse"><br>
+            <option value="1">klassekode</option>
+            <option value="2">klassenavn</option>
+            <option value="3">studiumkode</option>
+        </select><br>
         <input type="submit" value="Registrer">
     </form>
 </body>
