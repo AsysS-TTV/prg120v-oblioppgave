@@ -9,8 +9,6 @@
     Brukernavn: <input type="text" id="brukernavn" name="brukernavn"><br>
     Fornavn: <input type="text" id="fornavn" name="fornavn"><br>
     Etternavn: <input type="text" id="etternavn" name="etternavn"><br>
-    </form>
-    <form method="post" action="" id="klassekode" name="klassekode">
     Klassekode: <select name="klassekode" id="klassekode">
         <option value="">Velg klasse</option>
         <?php include("dynamiske-funksjoner.php"); hentKlasser(); ?>
