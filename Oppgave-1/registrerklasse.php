@@ -37,7 +37,7 @@ if (isset($_POST["klassekode"])) {
             $sqlsetning="INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode')";
             $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å registrere data i database");
             if ($sqlresultat) {
-                echo "Klassen er nå registrert";
+                echo "Klassen $klassekode, $klassenavn, $studiumkode er nå registrert";
             }
             else {
                 echo "Klassen er ikke registrert";
