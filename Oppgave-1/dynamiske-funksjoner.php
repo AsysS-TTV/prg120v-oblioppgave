@@ -16,7 +16,7 @@ function hentKlasser() {
 
 function hentStudenter() {
     include 'db-kobling.php';
-    $sqlsetning = "SELECT * FROM student ORDER BY brukernavn;"
+    $sqlsetning = "SELECT * FROM student ORDER BY brukernavn;";
     $sqlResultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente studenter");
     $antallRader = mysqli_num_rows($sqlResultat);
     for ($r=1;$r<=$antallRader;$r++) {
