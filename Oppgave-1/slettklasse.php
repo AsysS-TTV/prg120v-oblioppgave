@@ -8,34 +8,26 @@
 <body>
     <h1>Slett klasse</h1>
     <p>Velg en klasse å slette:</p>
-    <form method="post" action="">
-        Klasse 
-        <select name="klassekode">
-            <?php include 'dynamisk-listeboks.php'; hentKlasser(); ?>
-        </select>
-        <input type="submit" value="Slett klasse">
+    <form method="post" action="" id="Slettklasseknapp" name="Slettklasseknapp"> 
+        Klasse:
+        <select name="klassekode" id="klassekode">
+            <option value="">Velg klasse</option>
+            <?php include("dynamiske-funksjoner.php"); hentKlasser(); ?>
+        </select> <br/>
+        <input type="submit" value="Slett klasse" id="Slettklasseknapp" name="Slettklasseknapp">
     </form>
 </body>
 </html>
 
 <?php
-    if (isset($_POST["klassekode"])) {
+    if (isset($_POST["Slettklasseknapp"])) {
         $klassekode = $_POST["klassekode"];
-        $klassenavn = $_POST["klassenavn"];
-        $studiumkode = $_POST["studiumkode"];  
-
-    include 'db-kobling.php';
-        $sqlsetning = "SELECT * FROM klasse WHERE klassekode = '$klassekode' AND klassenavn = '$klassenavn' AND studiumkode = '$studiumkode'";
-        $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente klasse");
-        $antallRader = mysqli_num_rows($resultat);
-            if ($antallRader==0) {
-                print ("Klassen finnes ikke.");
-             }
-            else {
-                $sqlsetning = "DELETE FROM klasse WHERE klassekode = '$klassekode' AND klassenavn = '$klassenavn' AND studiumkode = '$studiumkode'";
-                mysqli_query($db, $sqlsetning) or die ("ikke mulig å slette klasse");
-                echo "<p>Klassen $klassekode $klassenavn $studiumkode er slettet.</p>";
-            }
+        if (!$klassekode) {
+            die("Vennligst velg en klasse.");
         }
-    ?> 
-
+    include 'db-kobling.php';
+         $sqlsetning = "DELETE FROM klasse WHERE klassekode = '$klassekode'";
+             mysqli_query($db, $sqlsetning) or die ("ikke mulig å slette klasse");
+             echo "<p>Klassen $klassekode er slettet.</p>";
+            }
+?> 
