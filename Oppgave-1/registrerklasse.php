@@ -7,11 +7,16 @@
     <h1>Registrer klasse</h1>
     <form action="registrerklasse.php" method="post">
         <label for="klasse">Klasse:</label><br>
-        <select id="registerklasse" name="klasse"><br>
-            <option value="1" text="klassekode">klassekode</option>
-            <option value="2" text="klassenavn">klassenavn</option>
-            <option value="3" text="studiumkode">studiumkode</option>
-        </select><br>
+        <input list="registerklasse" id="registerklasse" name="klasse"><br>
+            <datalist id="registerklasse">
+                <option value="klassekode">
+                <option value="klassenavn">
+                <option value="studiumkode">
+            </datalist><br>
+        <label for="klassenavn">Klassenavn:</label><br>
+        <input type="text" id="klassenavn" name="klassenavn"><br>
+        <label for="studiumkode">Studiumkode:</label><br>
+        <input type="text" id="studiumkode" name="studiumkode"><br>
         <input type="submit" value="Registrer">
     </form>
 </body>
@@ -23,7 +28,7 @@
 */
 include 'db-kobling.php'; /* tilkobling til database-serveren utført */
 
-$sqlsetning="INSERT INTO klassekode (klasse, klassenavn, studiumkode) VALUES ('$_POST[klasse]', '$_POST[klassenavn]', '$_POST[studiumkode]')";
+$sqlsetning="INSERT INTO klasse (klasse, klassenavn, studiumkode) VALUES ('$_POST[klasse]', '$_POST[klassenavn]', '$_POST[studiumkode]')";
 $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å registrere data i database");
 if ($sqlresultat) {
     echo "Klassen er nå registrert";
