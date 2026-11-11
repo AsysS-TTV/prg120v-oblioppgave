@@ -10,9 +10,10 @@
     <p>Velg en student å slette:</p>
     <form method="post" action="">
         Student 
-        <select name="brukernavn">
+        <select name="brukernavn" id="brukernavn">
+            <option value="">Velg student</option>
             <?php include 'dynamisk-listeboks.php'; hentStudenter(); ?>
-        </select>
+        </select> <br/>
         <input type="submit" value="Slett student">
     </form>
 </body>
