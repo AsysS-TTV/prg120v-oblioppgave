@@ -25,7 +25,7 @@ if (isset($_POST["klassekode"])) {
     $studiumkode = $_POST["studiumkode"];
 
     include 'db-kobling.php'; /* tilkobling til database-serveren utført */
-        $sqlsetning="SELECT * FROM klasse WHERE klasse='$klassekode'";
+        $sqlsetning="SELECT * FROM klasse WHERE klassekode='$klassekode'";
         $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å hente data fra database");
         $antall_rader=mysqli_num_rows($sqlresultat);
 
@@ -34,7 +34,7 @@ if (isset($_POST["klassekode"])) {
         }
         else 
         {
-            $sqlsetning="INSERT INTO klasse (klasse, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode')";
+            $sqlsetning="INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode')";
             $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å registrere data i database");
             if ($sqlresultat) {
                 echo "Klassen er nå registrert";
