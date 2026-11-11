@@ -1,3 +1,6 @@
+<script src="funksjoner.js"></script>
+
+
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -12,7 +15,6 @@
             <option value="">Velg klasse</option>
             <?php include("dynamiske-funksjoner.php"); hentKlasser(); ?>
         </select> <br/>
-        <script src="funksjoner.js"></script>
         <input type="submit" value="Slett klasse" id="Slettklasseknapp" name="Slettklasseknapp" onclick="return bekreft()">
     </form>
 </body>
