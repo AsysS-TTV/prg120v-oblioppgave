@@ -58,5 +58,6 @@ for ($r=1; $r<=mysqli_num_rows($sqlresultat); $r++) {
     echo "$rad[0] $rad[1] $rad[2]";
     echo "<br>";
 }
+print ("</table>"); 
 mysqli_close($db); /* lukker tilkobling til database-serveren */
 ?>
