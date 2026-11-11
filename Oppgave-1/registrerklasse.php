@@ -32,8 +32,7 @@ if (isset($_POST["klassekode"])) {
         if ($antall_rader != 0) {
             echo "Klassen eksisterer allerede";
         }
-        else 
-        {
+        else {
             $sqlsetning="INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode')";
             $sqlresultat=mysqli_query($db,$sqlsetning) or die ("ikke mulig å registrere data i database");
             if ($sqlresultat) {
