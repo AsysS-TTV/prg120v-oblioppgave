@@ -14,17 +14,22 @@
             <option value="">Velg student</option>
             <?php include 'dynamisk-listeboks.php'; hentStudenter(); ?>
         </select> <br/>
-        <input type="submit" value="Slett student">
+        <input type="submit" value="Slett student" id="Slettstudentknapp" name="Slettstudentknapp">
     </form>
 </body>
 </html>
 
 <?php
-    if (isset($_POST["brukernavn"])) {
-        $brukernavn = $_POST["brukernavn"];
-        $fornavn = $_POST["fornavn"];
-        $etternavn = $_POST["etternavn"];  
-        $klassekode = $_POST["klassekode"];
+    if (isset($_POST["Slettstudentknapp"])) {
+        if (isset($_POST["brukernavn"])) {
+            $brukernavn = $_POST["brukernavn"];
+            include 'db-kobling.php';
+            $sqlsetning = "SELECT * FROM student WHERE brukernavn = '$brukernavn'";
+            $resultat = mysqli_query($db, $sqlsetning) or die ("ikke mulig å hente student");
+            $rad = mysqli_fetch_array($resultat);
+            $fornavn = $rad["fornavn"];
+            $etternavn = $rad["etternavn"];
+            $klassekode = $rad["klassekode"];
 
     include 'db-kobling.php';
         $sqlsetning = "SELECT * FROM student WHERE brukernavn = '$brukernavn' AND fornavn = '$fornavn' AND etternavn = '$etternavn' AND klassekode = '$klassekode'";
@@ -39,5 +44,6 @@
                 echo "<p>Studenten $brukernavn $fornavn $etternavn $klassekode er slettet.</p>";
             }
         }
+    }
     ?> 
 
