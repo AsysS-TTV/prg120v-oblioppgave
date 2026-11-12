@@ -20,7 +20,6 @@
  *  Programmet registrerer klasse i database
  */
 
-// Sjekker om char er innenfor kravene til databasetabellenen
 include 'varcharcheck.php'; // Inkluderer valideringsfunksjoner
 
 // Sjekker om skjemaet er sendt inn

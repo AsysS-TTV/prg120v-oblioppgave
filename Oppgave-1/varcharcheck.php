@@ -1,96 +1,110 @@
 <?php
 /**
  * varcharcheck.php
- * Validering av inputbokser for å sjekke lengde før de sendes til databasen
+ * Automatisk validering av inputbokser for å forhindre database-feil
+ * Definerer databaser-feltlengder og validerer automatisk
  */
+
+// Database feltlengder for alle tabeller
+$GLOBALS['db_field_limits'] = array(
+    'klasse' => array(
+        'klassekode' => 5,
+        'klassenavn' => 50,
+        'studiumkode' => 10
+    ),
+    'student' => array(
+        'brukernavn' => 20,
+        'fornavn' => 30,
+        'etternavn' => 30,
+        'klassekode' => 5
+    ),
+    'studium' => array(
+        'studiumkode' => 10,
+        'studienavn' => 50
+    )
+);
 
 /**
- * Validerer at input ikke overstiger maksimal lengde
- * @param array $data Assosiativ array med felt-navn som nøkkel og verdi som data
- * @param array $limits Assosiativ array med felt-navn som nøkkel og maksimal lengde som verdi
- * @return array Array med 'valid' (bool) og 'errors' (array av feilmeldinger)
+ * Validerer et felt mot maksimal lengde
  */
-function validerInputLengde($data, $limits) {
+function validerFeltLengde($feltNavn, $verdi, $maksLengde) {
+    if (strlen($verdi) > $maksLengde) {
+        return "Feltet '$feltNavn' kan ikke være lengre enn $maksLengde tegn. Du skrev " . strlen($verdi) . " tegn.";
+    }
+    return null;
+}
+
+/**
+ * Henter alle POST-felt som skal valideres
+ */
+function hentPostFelt() {
+    if (empty($_POST)) {
+        return array();
+    }
+    
+    $felt = array();
+    foreach ($_POST as $key => $value) {
+        if ($key !== 'submit' && $key !== 'reset') {
+            $felt[$key] = $value;
+        }
+    }
+    return $felt;
+}
+
+/**
+ * Bestemmer hvilken tabell som skal valideres basert på POST-feltene
+ */
+function bestemTabell($postFelt) {
+    if (isset($postFelt['klassekode']) && isset($postFelt['klassenavn']) && isset($postFelt['studiumkode'])) {
+        return 'klasse';
+    }
+    if (isset($postFelt['brukernavn']) && isset($postFelt['fornavn']) && isset($postFelt['etternavn'])) {
+        return 'student';
+    }
+    if (isset($postFelt['studiumkode']) && isset($postFelt['studienavn'])) {
+        return 'studium';
+    }
+    return null;
+}
+
+/**
+ * Validerer POST-data automatisk og stopper hvis det er feil
+ */
+function validerPostData() {
+    if (empty($_POST)) {
+        return;
+    }
+    
+    $postFelt = hentPostFelt();
+    if (empty($postFelt)) {
+        return;
+    }
+    
+    $tabell = bestemTabell($postFelt);
+    if ($tabell === null) {
+        return;
+    }
+    
+    $grenser = $GLOBALS['db_field_limits'][$tabell];
     $feil = array();
-    $valid = true;
-
-    foreach ($data as $felt => $verdi) {
-        if (isset($limits[$felt])) {
-            $makslengde = $limits[$felt];
-            $faktisklengde = strlen($verdi);
-
-            if ($faktisklengde > $makslengde) {
-                $valid = false;
-                $feil[$felt] = "Feltet '{$felt}' kan ikke være længre enn {$makslengde} tegn. Du skrev {$faktisklengde} tegn.";
+    
+    foreach ($postFelt as $felt => $verdi) {
+        if (isset($grenser[$felt])) {
+            $feilMelding = validerFeltLengde($felt, $verdi, $grenser[$felt]);
+            if ($feilMelding !== null) {
+                $feil[] = $feilMelding;
             }
         }
     }
-
-    return array(
-        'valid' => $valid,
-        'errors' => $feil
-    );
-}
-
-/**
- * Validerer at påkrevde felt ikke er tomme
- * @param array $data Assosiativ array med felt-navn som nøkkel og verdi som data
- * @param array $required Array med navn på påkrevde felt
- * @return array Array med 'valid' (bool) og 'errors' (array av feilmeldinger)
- */
-function validerPakrevdeFelt($data, $required) {
-    $feil = array();
-    $valid = true;
-
-    foreach ($required as $felt) {
-        if (!isset($data[$felt]) || empty($data[$felt])) {
-            $valid = false;
-            $feil[$felt] = "Feltet '{$felt}' er påkrevd.";
-        }
+    
+    if (!empty($feil)) {
+        visFeilmeldinger($feil);
+        exit();
     }
-
-    return array(
-        'valid' => $valid,
-        'errors' => $feil
-    );
-}
-
-/**
- * Kombinert validering - sjekker både påkrevde felt og lengde
- * @param array $data Assosiativ array med felt-navn som nøkkel og verdi som data
- * @param array $limits Assosiativ array med felt-navn som nøkkel og maksimal lengde som verdi
- * @param array $required Array med navn på påkrevde felt (valgfritt)
- * @return array Array med 'valid' (bool) og 'errors' (array av feilmeldinger)
- */
-function validerData($data, $limits, $required = array()) {
-    $alleFeil = array();
-    $valid = true;
-
-    // Sjekk påkrevde felt først
-    if (!empty($required)) {
-        $pakrevdResultat = validerPakrevdeFelt($data, $required);
-        if (!$pakrevdResultat['valid']) {
-            $valid = false;
-            $alleFeil = array_merge($alleFeil, $pakrevdResultat['errors']);
-        }
-    }
-
-    // Sjekk lengde
-    $lengdeResultat = validerInputLengde($data, $limits);
-    if (!$lengdeResultat['valid']) {
-        $valid = false;
-        $alleFeil = array_merge($alleFeil, $lengdeResultat['errors']);
-    }
-
-    return array(
-        'valid' => $valid,
-        'errors' => $alleFeil
-    );
 }
 
 /**
  * Viser feilmeldinger i HTML-format
- * @param array $errors Array av feilmeldinger
  */
 function visFeilmeldinger($errors) {
     if (!empty($errors)) {
@@ -102,4 +116,7 @@ function visFeilmeldinger($errors) {
         echo "</ul></div>";
     }
 }
+
+// Kjør validering automatisk når filen inkluderes
+validerPostData();
 ?>
