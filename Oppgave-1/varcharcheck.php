@@ -108,12 +108,12 @@ function validerPostData() {
  */
 function visFeilmeldinger($errors) {
     if (!empty($errors)) {
-        echo "<div style='background-color: #ffcccc; border: 1px solid #ff0000; padding: 10px; margin: 10px 0; border-radius: 4px;'>";
-        echo "<strong style='color: #cc0000;'>Feil i skjemaet:</strong><ul>";
+        echo "<p><strong>Feil i skjemaet:</strong></p>";
+        echo "<ul>";
         foreach ($errors as $feil) {
             echo "<li>" . htmlspecialchars($feil) . "</li>";
         }
-        echo "</ul></div>";
+        echo "</ul>";
     }
 }
 
