@@ -21,24 +21,7 @@
  */
 
 // Sjekker om char er innenfor kravene til databasetabellenen
-$klassekode=$_POST["klassekode"];
-$klassenavn=$_POST["klassenavn"];
-$studiumkode=$_POST["studiumkode"];
-$feillengdeKlassekode = strlen($klassekode) > 5;
-$feillengdeKlassenavn = strlen($klassenavn) > 50;
-$feillengdeStudiumkode = strlen($studiumkode) > 50;
-if ($feillengdeKlassekode) {
-    echo "Klassekoden er for lang";
-}
-if ($feillengdeKlassenavn) {
-    echo "Klassenavnet er for langt";
-}
-if ($feillengdeStudiumkode) {
-    echo "Studiumkoden er for lang";
-}
-if ($feillengdeKlassekode || $feillengdeKlassenavn || $feillengdeStudiumkode) {
-    exit();
-}
+include 'varcharcheck.php'; // Inkluderer valideringsfunksjoner
 
 // Sjekker om skjemaet er sendt inn
 if (isset($_POST["klassekode"])) {
